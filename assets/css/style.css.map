@@ -1,0 +1,7 @@
+{
+"version": 3,
+"mappings": "AAWA,IAAI;EACA,OAAO,EAAE,IAAI;EACb,gBAAgB,EATF,IAAI",
+"sources": ["../sass/abstract/variables.scss"],
+"names": [],
+"file": "style.css"
+}
