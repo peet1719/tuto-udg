@@ -1,15 +1,14 @@
 // Colors
 
-$color-primary: #fff;
+$color-white: #fff;
 
-$color-secondary: #000;
+$color-primary: #000;
+$color-primary-light: #111;
+
+$color-secondary: #863C00;
 
 $color-terciary: #333;
 
 //FONT
 $default-font-size: 1.6rem;
 
-body{
-    display: flex;
-    background-color: $color-secondary;
-}

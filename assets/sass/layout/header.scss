@@ -1,0 +1,29 @@
+.logo img{
+    width: 100px;
+    height: 80px;
+}
+
+
+.container-header{
+    display:flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.nav-header ul{
+    display: flex;
+
+}
+
+.nav-header ul li{
+    list-style: none;
+    font-size: 2rem;
+    padding-left:4rem;
+}
+
+.nav-header ul li a{
+    text-decoration: none;
+    color:$color-white;
+    flex: 1 1 1;
+}
