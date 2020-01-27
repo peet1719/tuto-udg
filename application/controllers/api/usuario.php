@@ -90,7 +90,7 @@ class Usuario extends REST_Controller {
                     'status' => true,
                     'mensaje' => 'Usuario registrado'
                 ];
-                $this->response($mensaje,200);
+                $this->response($mensaje,201);
             } else {
                 $mensaje = [
                     'status' => false,
@@ -132,11 +132,10 @@ class Usuario extends REST_Controller {
             $mensaje = array(
                 'status' => false,
                 'error' => $this->form_validation->error_array(),
-                'enviados' => $_POST,
                 'mensaje' => validation_errors()
             );
 
-            $this->response($mensaje,403);
+            $this->response($mensaje,400);
         }else{
             $nombreUsuario = $data_array['nombreUsuario'];
             $password = $data_array['password'];
@@ -144,25 +143,23 @@ class Usuario extends REST_Controller {
             $respuesta = $this->usuario->login($nombreUsuario,$password);
             
             if($respuesta != false && !empty($respuesta)){
-                //se agrego el usuario correctamente
+                //Las credenciales son correctas
 
                 //generar token
-                $token_data['idUsuario'] = $respuesta->idUsuario;
+                $token_data['id'] = $respuesta->idUsuario;
                 $token_data['nombreUsuario'] = $respuesta->nombreUsuario;
-                $token_data['password'] = $respuesta->password;
                 $token_data['email'] = $respuesta->email;
                 $token_data['nombre'] = $respuesta->nombre;
                 $token_data['apellido'] = $respuesta->apellido;
-                $token_data['fechaCreacion'] = $respuesta->fechaCreacion;
-                $token_data['fechaActualizacion'] = $respuesta->fechaActualizacion;
                 $token_data['time'] = time();
 
                 $user_token = $this->authorization_token->generateToken($token_data);
 
 
                 $datos = [
+                    'idUsuario' => $respuesta->idUsuario,
                     'nombreUsuario' => $respuesta->nombreUsuario,
-                    'email' => $respuesta->password,
+                    'email' => $respuesta->email,
                     'nombre' => $respuesta->nombre,
                     'apellido' => $respuesta->apellido,
                     'fechaCreacion' => $respuesta->fechaCreacion,
@@ -185,6 +182,41 @@ class Usuario extends REST_Controller {
 
         }
 
+    }
+
+    public function data_get(){
+        $this->load->library('Authorization_Token');
+        header("Access-Control-Allow-Origin: *");
+
+        $is_valid = $this->authorization_token->validateToken();
+
+        if($is_valid['status']){
+            $data = $this->authorization_token->userData();
+        
+            if(isset($data->nombreUsuario)){
+                $mensaje = [
+                    'status' => true,
+                    'data' => $data,
+                    'mensaje' => 'Token valido'
+                ];
+                $this->response($mensaje,200);
+
+            }else{
+                $mensaje = [
+                    'status' => false,
+                    'mensaje' => 'Token invalido'
+                ];
+                $this->response($mensaje,401);            
+            }
+        }else{
+            $mensaje = [
+                'status' => false,
+                'mensaje' => 'Token invalido o ha expirado'
+            ];
+            $this->response($mensaje,401);
+        }
+
+        
     }
 
 }

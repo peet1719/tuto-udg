@@ -1,0 +1,35 @@
+.btn{
+    &,
+    &:link,
+    &:visited{
+        text-transform: uppercase;
+        text-decoration: none;
+        font-size: 1rem;
+        padding: 1.5rem 2.5rem;
+        border-radius: 5px;
+        letter-spacing: .2rem;
+        transition: all .3s;
+        
+    }
+
+    &:hover{
+        transform: translateY(-.2rem);
+        color: inherit;
+        box-shadow: 0 1rem 2rem rgba($color-white, 0.1);
+    }
+    &:active{
+        outline: none;
+        transform: translateY(.2rem);
+
+    }
+    &--primary{
+        background-color: $color-secondary;
+        color: $color-white;
+    }
+
+
+}
+
+.remove-arrow-dropdown::after{
+    content: none;
+}

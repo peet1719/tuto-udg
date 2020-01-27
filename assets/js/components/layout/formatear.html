@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <nav class="nav-header">
+        <ul class="nav-header-list">
+            <li><a href="#">Inicio</a></li>
+            <li class="dropdown">
+                <a class="dropdown-toggle" href="#" role="button" id="drop-menu-asignaturas" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false">
+                    Temas
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="drop-menu-asignaturas" role="menu">
+                    <li class="dropdown-submenu" v-for="item in items" :key="item.idAsignatura">
+                        <a class="dropdown-item" href="#">
+                            {{item.nombreAsignatura}}
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li class="dropown-item" v-for="temaAsignatura in item.temas" :key="temaAsignatura">
+                                <a tabindex="-1" href="#">{{temaAsignatura.tema}}</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+            <li><a href="#">Tutores</a></li>
+            <li><a href="">Busca Tutor</a></li>
+            <li><a href="">Iniciar sesión</a></li>
+            </div>
+            <ul>
+    </nav>
+</body>
+
+</html>
